@@ -1,0 +1,128 @@
+body {
+  background: #f4c430;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+.scene {
+  width: 340px;
+  height: 340px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+/* Plate */
+.scene::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) translateY(18px);
+  z-index: 0;
+
+  background:
+    radial-gradient(circle at 35% 30%, var(--plate-edge), var(--plate) 55%, rgba(255,255,255,0.25) 70%, transparent 72%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 65%, transparent 67%);
+  filter: blur(0.2px);
+}
+
+/* Shadow */
+.scene::after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 40px;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) translateY(165px);
+  z-index: 0;
+
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.35), transparent 70%);
+}
+
+.pizza {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  position: relative;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.crust {
+  position: absolute;
+  inset: 0;
+  background: #d18b47;
+  border-radius: 50%;
+}
+
+.sauce {
+  position: absolute;
+  inset: 12px;
+  background: #c0392b;
+  border-radius: 50%;
+  animation: dropIn 0.6s ease forwards;
+}
+
+.cheese {
+  position: absolute;
+  inset: 22px;
+  background: #f5e050;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.cheese::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, transparent 60%, #f5e050 61%);
+  animation: melt 3s ease-in-out infinite;
+}
+
+@keyframes melt {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.topping {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+.pepperoni {
+  width: 28px;
+  height: 28px;
+  background: #a93226;
+  top: 60px;
+  left: 80px;
+}
+
+.olive {
+  width: 14px;
+  height: 14px;
+  background: #2c3e50;
+  top: 140px;
+  left: 150px;
+}
+
+.pizza:hover {
+  clip-path: polygon(
+    50% 50%,
+    100% 0,
+    100% 100%
+  );
+  transition: clip-path 0.5s ease;
+}
